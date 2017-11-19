@@ -1,5 +1,7 @@
 <?php
 
+// use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,7 +13,12 @@
 |
 */
 
-Route::get('contacts', 'PagesController@getContact');
-Route::get('about', 'PagesController@getAbout');
-Route::get('/', 'PagesController@getIndex');
-Route::resource('posts', 'PostController');
+
+
+Route::group(['middleware' =>['web']], function(){
+  Route::get('contacts', 'PagesController@getContact');
+  Route::get('about', 'PagesController@getAbout');
+  Route::get('/', 'PagesController@getIndex');
+  Route::resource('posts', 'PostController');
+
+});
