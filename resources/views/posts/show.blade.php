@@ -31,7 +31,13 @@
         </div>
 
       </div>
+<div class="row">
+  <div class="col-md-12">
+    {{ Html::LinkRoute('posts.index', '<<See All Posts', [], ['class'=>'btn btn-link btn-block btn-h1-spacing']) }}
 
+  </div>
+
+</div>
 
     </div>
 
