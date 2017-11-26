@@ -38,7 +38,10 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, array('title'=>'required|max:255', 'body'=>'required'));
+        $this->validate($request, array(
+                'title'=>'required|max:255',
+                'body'=>'required'
+              ));
 
         $post = new Post;
         $post ->title = $request ->title;
@@ -85,7 +88,19 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validate exif_read_data
+        $this->validate($request, array(
+                'title'=>'required|max:255',
+                'body'=>'required'
+              ));
+        $post = Post::find($id);
+        $post->title = $request->input('title' );
+        $post-> body = $request->input('body');
+
+        $post->save();
+        //set flash dara whit success messsages
+        Session::flash('success', 'This post was successfully saved');
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**

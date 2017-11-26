@@ -7,7 +7,7 @@
 
   <div class="col-md-8">
 
-    {!! Form::model($post, ['route'=>['posts.update', $post->id]])!!}
+    {!! Form::model($post, ['route'=>['posts.update', $post->id], 'method'=>'PUT'])!!}
     <!-- 17 20 min -->
     {{ Form::label('title', 'Title')}}
     {{ Form::text('title', null,['class'=>'form-control input-lg'])}}
@@ -31,12 +31,13 @@
       <hr>
       <div class="row">
         <div class="col-sm-6">
-          <!-- {{ Form:submit('Save Changes', ['class'=> 'btn btn -success btn block']) }} -->
+
           {!! Html::linkRoute('posts.show', 'Cancel', array($post->id), array('class'=>'btn btn-danger btn-block'))!!}
           <!-- <a href="#" class="btn btn-primary bnt-block">Edit</a> -->
         </div>
         <div class="col-sm-6">
-          {!! Html::linkRoute('posts.update', 'Save Changes', array($post->id), array('class'=>'btn btn-success btn-block'))!!}
+          {{ Form::submit('Save Changes', ['class'=> 'btn btn-success btn block']) }}
+          <!-- {!! Html::linkRoute('posts.update', 'Save Changes', array($post->id), array('class'=>'btn btn-success btn-block'))!!} -->
         </div>
 
       </div>
