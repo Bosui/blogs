@@ -12,6 +12,9 @@
         {!! Form::open(array('route' => 'posts.store', 'data-parsley-validate' =>'')) !!}
           {{ Form::label('title', 'Title:')}}
           {{ Form::text('title', null, array('class' =>'form-control', 'required'=>'','maxlenght' =>'255'))}}
+          {{ Form::label('slug', 'Slug:') }}
+          {{ Form::text('slug', null, array('class'=>'form-control',' required'=>'','minlenght'=>'5', 'maxlenght'=>'255')) }}
+          
           {{ Form::label('body', "Post Body:")}}
           {{ Form::textarea('body', null, array('class' => 'form-control','required'=>''))}}
 
