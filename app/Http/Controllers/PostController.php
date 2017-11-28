@@ -15,7 +15,8 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = post::orderBy('id', 'desc') -> paginate(5);
+        $posts = Post::orderBy('id', 'desc') -> paginate(5);
+
         return view('posts.index')->withPosts($posts);
     }
 
@@ -66,6 +67,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
+        //echo $post;
         return view('posts.show') -> withPost($post);
 
     }
@@ -91,12 +93,21 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $post = Post::find($id);
+      
+      if($request->input('slug') ==$post->slug){
+        $this->validate($request, array(
+                'title'=>'required|max:255',
+                'body'=>'required'
+              ));
+      } else {
         // validate exif_read_data
         $this->validate($request, array(
                 'title'=>'required|max:255',
                 'slug'=> 'required|alpha_dash|min:5|max:255|unique:posts,slug',
                 'body'=>'required'
               ));
+      }
         $post = Post::find($id);
         $post-> title = $request->input('title' );
         $post-> slug = $request->input('slug');
